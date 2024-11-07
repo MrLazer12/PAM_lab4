@@ -1,0 +1,136 @@
+{
+  "banners": [
+    {
+      "title": "Summer Sale",
+      "description": "Enjoy up to 50% off on all summer products!",
+      "image": "https://static.tildacdn.one/tild3563-3930-4335-b162-303564383038/328530122_9021160241.jpg"
+    },
+    {
+      "title": "New Arrivals",
+      "description": "Check out the latest trends in our collection.",
+      "image": "https://t3.ftcdn.net/jpg/05/75/66/88/360_F_575668898_05nhhqdSNoUtbnNcupJyRcDONlibzSHr.jpg"
+    },
+    {
+      "title": "Holiday Discounts",
+      "description": "Get amazing discounts on holiday gifts and more!",
+      "image": "https://biovinc.com/wp-content/uploads/2019/12/holiday-discount-1024x512-1.jpg"
+    },
+    {
+      "title": "Exclusive Offer",
+      "description": "Sign up now and get an exclusive 10% discount.",
+      "image": "https://as1.ftcdn.net/v2/jpg/02/32/62/94/1000_F_232629461_dGic7SZbyc2URtNPnzbjxNMIqgA4f9J8.jpg"
+    },
+    {
+      "title": "Exclusive Offer22",
+      "description": "Sign up now and get an exclusive 10% discount.",
+      "image": "https://as1.ftcdn.net/v2/jpg/02/32/62/94/1000_F_232629461_dGic7SZbyc2URtNPnzbjxNMIqgA4f9J8.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "title": "Cardiology",
+      "icon": "https://img.freepik.com/free-vector/high-blood-pressure-abstract-concept-illustration_335657-4603.jpg?t=st=1730968593~exp=1730972193~hmac=59d54074ccb8da510c1c66a5f79b194af3f1fd83b2a197017122cb560da4afef&w=740"
+    },
+    {
+      "title": "Dentistry",
+      "icon": "https://img.freepik.com/free-vector/stomatology-dentist-smile-realistic-composition-with-images-smiling-human-mouth-surrounded-by-manual-dental-tools-illustration_1284-64902.jpg?t=st=1730968621~exp=1730972221~hmac=b1f13041be11350da4372153bb3ec6dd543e047a97a1562d9057ea3b56040104&w=740"
+    },
+    {
+      "title": "Dermatology",
+      "icon": "https://img.freepik.com/free-vector/tiny-dermatologist-examining-dry-face-skin-flat-vector-illustration-abstract-epidermis-disease-diagnostics-treatment-dermatology-health-medical-protection-cosmetology-concept_74855-10167.jpg?t=st=1730968663~exp=1730972263~hmac=f3c47aed5ac5493fcaab613ae67f986651c86737edd1a4741b88f3d4b3aae6e0&w=1380"
+    },
+    {
+      "title": "Pediatrics",
+      "icon": "https://img.freepik.com/premium-vector/vector-design-pediatric-ward-icon-style_822882-114721.jpg?w=740"
+    }
+  ],
+  "nearby_centers": [
+    {
+      "image": "https://img.freepik.com/free-photo/clinical-reception-with-waiting-room-facility-lobby-registration-counter-used-patients-with-medical-appointments-empty-reception-desk-health-center-checkup-visits_482257-51247.jpg?t=st=1730968481~exp=1730972081~hmac=96005f31d66d7bb1cb7f49b192cf596154e89e3fb7b0116c8fe3097d338755f4&w=1380",
+      "title": "Medical Center 1",
+      "location_name": "Location 1",
+      "review_rate": 4.1,
+      "count_reviews": 102,
+      "distance_km": 1.1,
+      "distance_minutes": 6
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/clinical-reception-with-waiting-room-facility-lobby-registration-counter-used-patients-with-medical-appointments-empty-reception-desk-health-center-checkup-visits_482257-51247.jpg?t=st=1730968481~exp=1730972081~hmac=96005f31d66d7bb1cb7f49b192cf596154e89e3fb7b0116c8fe3097d338755f4&w=1380",
+      "title": "Medical Center 2",
+      "location_name": "Location 2",
+      "review_rate": 4.2,
+      "count_reviews": 104,
+      "distance_km": 1.1,
+      "distance_minutes": 7
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/clinical-reception-with-waiting-room-facility-lobby-registration-counter-used-patients-with-medical-appointments-empty-reception-desk-health-center-checkup-visits_482257-51247.jpg?t=st=1730968481~exp=1730972081~hmac=96005f31d66d7bb1cb7f49b192cf596154e89e3fb7b0116c8fe3097d338755f4&w=1380",
+      "title": "Medical Center 3",
+      "location_name": "Location 3",
+      "review_rate": 4.3,
+      "count_reviews": 106,
+      "distance_km": 1.1,
+      "distance_minutes": 8
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/clinical-reception-with-waiting-room-facility-lobby-registration-counter-used-patients-with-medical-appointments-empty-reception-desk-health-center-checkup-visits_482257-51247.jpg?t=st=1730968481~exp=1730972081~hmac=96005f31d66d7bb1cb7f49b192cf596154e89e3fb7b0116c8fe3097d338755f4&w=1380",
+      "title": "Medical Center 4",
+      "location_name": "Location 4",
+      "review_rate": 4.4,
+      "count_reviews": 108,
+      "distance_km": 1.2,
+      "distance_minutes": 9
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/clinical-reception-with-waiting-room-facility-lobby-registration-counter-used-patients-with-medical-appointments-empty-reception-desk-health-center-checkup-visits_482257-51247.jpg?t=st=1730968481~exp=1730972081~hmac=96005f31d66d7bb1cb7f49b192cf596154e89e3fb7b0116c8fe3097d338755f4&w=1380",
+      "title": "Medical Center 5",
+      "location_name": "Location 5",
+      "review_rate": 4.4,
+      "count_reviews": 108,
+      "distance_km": 1.2,
+      "distance_minutes": 9
+    }
+  ],
+  "doctors": [
+    {
+      "image": "https://img.freepik.com/free-photo/portrait-smiling-young-doctors-standing-together-portrait-medical-staff-inside-modern-hospital-smiling-camera_657921-885.jpg?t=st=1730968780~exp=1730972380~hmac=d07f7eeb153453a28201e217ada0abd8f161def73f0526eb080806c013aae4b3&w=1380",
+      "full_name": "Dr. John Smith",
+      "type_of_doctor": "Cardiologist",
+      "location_of_center": "Health Center 1, USA",
+      "review_rate": 4.1,
+      "reviews_count": 53
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/portrait-smiling-young-doctors-standing-together-portrait-medical-staff-inside-modern-hospital-smiling-camera_657921-885.jpg?t=st=1730968780~exp=1730972380~hmac=d07f7eeb153453a28201e217ada0abd8f161def73f0526eb080806c013aae4b3&w=1380",
+      "full_name": "Dr. Mary Jones",
+      "type_of_doctor": "Pediatrician",
+      "location_of_center": "Health Center 2, USA",
+      "review_rate": 4.2,
+      "reviews_count": 56
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/doctors-shaking-hands-with-patient-standing-corridor-hospital_1303-21239.jpg?t=st=1730968800~exp=1730972400~hmac=27d38ff7884e6873925ce322bb06646caf008683113436b31f808caaf0accefd&w=1380",
+      "full_name": "Dr. Alice Brown",
+      "type_of_doctor": "Dermatologist",
+      "location_of_center": "Health Center 3, USA",
+      "review_rate": 4.3,
+      "reviews_count": 59
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/doctors-shaking-hands-with-patient-standing-corridor-hospital_1303-21239.jpg?t=st=1730968800~exp=1730972400~hmac=27d38ff7884e6873925ce322bb06646caf008683113436b31f808caaf0accefd&w=1380",
+      "full_name": "Dr. David Lee",
+      "type_of_doctor": "Orthopedic Surgeon",
+      "location_of_center": "Health Center 4, USA",
+      "review_rate": 4.4,
+      "reviews_count": 62
+    },
+    {
+      "image": "https://img.freepik.com/free-photo/doctors-shaking-hands-with-patient-standing-corridor-hospital_1303-21239.jpg?t=st=1730968800~exp=1730972400~hmac=27d38ff7884e6873925ce322bb06646caf008683113436b31f808caaf0accefd&w=1380",
+      "full_name": "Dr. Emily Clark",
+      "type_of_doctor": "Dentist",
+      "location_of_center": "Health Center 5, USA",
+      "review_rate": 4.5,
+      "reviews_count": 65
+    }
+  ]
+}
