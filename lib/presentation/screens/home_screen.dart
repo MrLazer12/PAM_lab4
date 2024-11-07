@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Doctor Finder"),
+        title: Text("Doctor Finder", style: TextStyle(fontSize: 24, color: Colors.black)),
         backgroundColor: Colors.blueAccent,
       ),
       body: SingleChildScrollView(
@@ -61,20 +61,21 @@ class HomeScreen extends StatelessWidget {
                       itemCount: categories.length,
                       itemBuilder: (context, index) {
                         return Card(
-                          elevation: 3,
+                          elevation: 0, // No shadow
                           margin: EdgeInsets.symmetric(vertical: 8),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.network(
                                 categories[index].icon,
-                                width: 50,
-                                height: 50,
+                                width: 75, // Increased icon size
+                                height: 75, // Increased icon size
                                 fit: BoxFit.cover,
                               ),
                               SizedBox(height: 8),
                               Text(
                                 categories[index].title,
+                                style: TextStyle(fontSize: 14, color: Colors.black),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -89,45 +90,9 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
 
-              // Nearby Clinics Section
+              // Nearby Clinics Section (Slider)
               SectionTitle(title: 'Nearby Clinics'),
-              FutureBuilder<List<Clinic>>(
-                future: getNearbyCenters.execute(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (snapshot.hasData) {
-                    final clinics = snapshot.data!;
-                    return Column(
-                      children: clinics.map((clinic) {
-                        return Card(
-                          elevation: 3,
-                          margin: EdgeInsets.symmetric(vertical: 8),
-                          child: ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(clinic.image, width: 80, height: 80, fit: BoxFit.cover),
-                            ),
-                            title: Text(clinic.title, style: TextStyle(fontWeight: FontWeight.bold)),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(clinic.locationName),
-                                Text('Distance: ${clinic.distanceKm} km'),
-                                Text('Reviews: ${clinic.countReviews} (Rating: ${clinic.reviewRate})'),
-                              ],
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    );
-                  } else {
-                    return Center(child: Text('No nearby clinics available'));
-                  }
-                },
-              ),
+              _NearbyClinicsSlider(getNearbyCenters: getNearbyCenters),
               SizedBox(height: 20),
 
               // Doctors Section
@@ -147,17 +112,29 @@ class HomeScreen extends StatelessWidget {
                           elevation: 3,
                           margin: EdgeInsets.symmetric(vertical: 8),
                           child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage: NetworkImage(doctor.image),
-                              radius: 30,
+                            leading: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(doctor.image, width: 60, height: 60, fit: BoxFit.cover),
                             ),
-                            title: Text(doctor.fullName, style: TextStyle(fontWeight: FontWeight.bold)),
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  doctor.fullName,
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.favorite_border, size: 24, color: Colors.red),
+                                  onPressed: () {},
+                                ),
+                              ],
+                            ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Specialty: ${doctor.typeOfDoctor}'),
-                                Text('Location: ${doctor.locationOfCenter}'),
-                                Text('Reviews: ${doctor.reviewsCount} (Rating: ${doctor.reviewRate})'),
+                                Text('Specialty: ${doctor.typeOfDoctor}', style: TextStyle(fontSize: 16, color: Colors.black)),
+                                Text('Location: ${doctor.locationOfCenter}', style: TextStyle(fontSize: 16, color: Colors.black)),
+                                Text('Reviews: ${doctor.reviewsCount} (Rating: ${doctor.reviewRate})', style: TextStyle(fontSize: 16, color: Colors.black)),
                               ],
                             ),
                           ),
@@ -230,6 +207,7 @@ class __BannerSliderState extends State<_BannerSlider> {
                   },
                 ),
               ),
+              SizedBox(height: 10),
               // Dots indicator
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -257,6 +235,116 @@ class __BannerSliderState extends State<_BannerSlider> {
   }
 }
 
+class _NearbyClinicsSlider extends StatefulWidget {
+  final GetNearbyCenters getNearbyCenters;
+
+  const _NearbyClinicsSlider({required this.getNearbyCenters});
+
+  @override
+  __NearbyClinicsSliderState createState() => __NearbyClinicsSliderState();
+}
+
+class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Clinic>>(
+      future: widget.getNearbyCenters.execute(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (snapshot.hasData) {
+          final clinics = snapshot.data!;
+          return Container(
+            height: 300, // Increased height to display more information
+            child: PageView.builder(
+              itemCount: clinics.length,
+              controller: PageController(initialPage: _currentIndex),
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.blueAccent, width: 1),
+                    boxShadow: [
+                      BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 8, offset: Offset(0, 4)),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Clinic image
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          clinics[index].image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: 140,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          clinics[index].title,
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          clinics[index].locationName,
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.star, size: 16, color: Colors.amber),
+                            SizedBox(width: 4),
+                            Text(
+                              '${clinics[index].reviewRate} (${clinics[index].countReviews} reviews)',
+                              style: TextStyle(fontSize: 14, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.location_on, size: 16, color: Colors.blue),
+                            SizedBox(width: 4),
+                            Text(
+                              '${clinics[index].distanceKm} km (${clinics[index].distanceMinutes} min)',
+                              style: TextStyle(fontSize: 14, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          );
+        } else {
+          return Center(child: Text('No nearby clinics available'));
+        }
+      },
+    );
+  }
+}
+
 class SectionTitle extends StatelessWidget {
   final String title;
 
@@ -269,9 +357,9 @@ class SectionTitle extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 22, // Increased font size
           fontWeight: FontWeight.bold,
-          color: Colors.blueAccent,
+          color: Colors.black,
         ),
       ),
     );
