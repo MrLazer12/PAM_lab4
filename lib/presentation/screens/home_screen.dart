@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   final GetDoctors getDoctors;
   final GetNearbyCenters getNearbyCenters;
 
-  HomeScreen({
+  const HomeScreen({super.key,
     required this.getBanners,
     required this.getCategories,
     required this.getDoctors,
@@ -27,8 +27,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Doctor Finder", style: TextStyle(fontSize: 24, color: Colors.black)),
-        backgroundColor: Colors.blueAccent,
+        title: const Text("Doctor Finder", style: TextStyle(fontSize: 24, color: Colors.black)),
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -38,23 +38,23 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               // Banners Section
               _BannerSlider(getBanners: getBanners),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Categories Section
-              SectionTitle(title: 'Categories'),
+              const SectionTitle(title: 'Categories'),
               FutureBuilder<List<Category>>(
                 future: getCategories.execute(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (snapshot.hasData) {
                     final categories = snapshot.data!;
                     return GridView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         childAspectRatio: 1.0,
                       ),
@@ -62,20 +62,20 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Card(
                           elevation: 0, // No shadow
-                          margin: EdgeInsets.symmetric(vertical: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.network(
                                 categories[index].icon,
-                                width: 75, // Increased icon size
-                                height: 75, // Increased icon size
-                                fit: BoxFit.cover,
+                                width: 75,
+                                height: 75,
+                                fit: BoxFit.fill,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 10),
                               Text(
                                 categories[index].title,
-                                style: TextStyle(fontSize: 14, color: Colors.black),
+                                style: const TextStyle(fontSize: 14, color: Colors.black),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -84,19 +84,19 @@ class HomeScreen extends StatelessWidget {
                       },
                     );
                   } else {
-                    return Center(child: Text('No categories available'));
+                    return const Center(child: Text('No categories available'));
                   }
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 25),
 
               // Nearby Clinics Section (Slider)
-              SectionTitle(title: 'Nearby Clinics'),
+              const SectionTitle(title: 'Nearby Clinics'),
               _NearbyClinicsSlider(getNearbyCenters: getNearbyCenters),
-              SizedBox(height: 20),
+              const SizedBox(height: 24),
 
               // Doctors Section
-              SectionTitle(title: 'Doctors'),
+              const SectionTitle(title: 'Doctors'),
               FutureBuilder<List<Doctor>>(
                 future: getDoctors.execute(),
                 builder: (context, snapshot) {
@@ -121,10 +121,10 @@ class HomeScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   doctor.fullName,
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
                                 IconButton(
-                                  icon: Icon(Icons.favorite_border, size: 24, color: Colors.red),
+                                  icon: const Icon(Icons.favorite_border, size: 24, color: Colors.red),
                                   onPressed: () {},
                                 ),
                               ],
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                       }).toList(),
                     );
                   } else {
-                    return Center(child: Text('No doctors available'));
+                    return const Center(child: Text('No doctors available'));
                   }
                 },
               ),
@@ -180,16 +180,16 @@ class __BannerSliderState extends State<_BannerSlider> {
           return Column(
             children: [
               // Search input field
-              TextField(
+              const TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for Doctors or Clinics...',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.search),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               // Banner Image Slider
-              Container(
+              SizedBox(
                 height: 200,
                 child: PageView.builder(
                   itemCount: banners.length,
@@ -207,7 +207,7 @@ class __BannerSliderState extends State<_BannerSlider> {
                   },
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               // Dots indicator
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -228,7 +228,7 @@ class __BannerSliderState extends State<_BannerSlider> {
             ],
           );
         } else {
-          return Center(child: Text('No banners available'));
+          return const Center(child: Text('No banners available'));
         }
       },
     );
@@ -253,13 +253,13 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
       future: widget.getNearbyCenters.execute(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (snapshot.hasData) {
           final clinics = snapshot.data!;
-          return Container(
-            height: 300, // Increased height to display more information
+          return SizedBox(
+            height: 300,
             child: PageView.builder(
               itemCount: clinics.length,
               controller: PageController(initialPage: _currentIndex),
@@ -270,7 +270,7 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
               },
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(color: Colors.blueAccent, width: 1),
@@ -302,7 +302,7 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
                           clinics[index].locationName,
-                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          style: const TextStyle(fontSize: 16, color: Colors.black),
                         ),
                       ),
                       Padding(
@@ -322,8 +322,8 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
                         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                         child: Row(
                           children: [
-                            Icon(Icons.location_on, size: 16, color: Colors.blue),
-                            SizedBox(width: 4),
+                            const Icon(Icons.location_on, size: 16, color: Colors.blue),
+                            const SizedBox(width: 4),
                             Text(
                               '${clinics[index].distanceKm} km (${clinics[index].distanceMinutes} min)',
                               style: TextStyle(fontSize: 14, color: Colors.black),
@@ -338,7 +338,7 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
             ),
           );
         } else {
-          return Center(child: Text('No nearby clinics available'));
+          return const Center(child: Text('No nearby clinics available'));
         }
       },
     );
@@ -348,7 +348,7 @@ class __NearbyClinicsSliderState extends State<_NearbyClinicsSlider> {
 class SectionTitle extends StatelessWidget {
   final String title;
 
-  const SectionTitle({required this.title});
+  const SectionTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -356,8 +356,8 @@ class SectionTitle extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
-        style: TextStyle(
-          fontSize: 22, // Increased font size
+        style: const TextStyle(
+          fontSize: 22,
           fontWeight: FontWeight.bold,
           color: Colors.black,
         ),
